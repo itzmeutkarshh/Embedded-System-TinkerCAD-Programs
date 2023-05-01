@@ -1,0 +1,34 @@
+
+
+#include<LiquidCrystal.h>
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+int switch1=10,switch2=9,switch3=8;
+
+void setup()
+{
+  pinMode(switch1, INPUT);
+  pinMode(switch2, INPUT);
+  pinMode(switch3, INPUT);
+  lcd.begin(16, 2); 
+}
+
+void loop()
+{
+  if(digitalRead(switch1) == LOW && digitalRead(switch2) == LOW && digitalRead(switch3) == HIGH)
+  {
+    lcd.clear();
+  } else if(digitalRead(switch1) == LOW && digitalRead(switch2) == HIGH && digitalRead(switch3) == LOW)
+  {
+    lcd.setCursor(0,0);          
+    lcd.print("Tiwari"); 
+    lcd.setCursor(0,1);           
+    lcd.print("Utkarsh");
+  } else if(digitalRead(switch1) == HIGH && digitalRead(switch2) == LOW && digitalRead(switch3) == LOW)
+  {
+    lcd.setCursor(0,0);          
+    lcd.print("Utkarsh"); 
+    lcd.setCursor(0,1);           
+    lcd.print("Tiwari");
+  }
+}
