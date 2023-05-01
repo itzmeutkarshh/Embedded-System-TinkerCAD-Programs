@@ -1,3 +1,5 @@
+<!-- Q. Write a program in Embedded C to enable and disable a particular pin “P0.1” with a delay of 250ms. 
+Simulate the program using TinkerCAD with Arduino board in circuit section.-->
 
 
 void setup()
