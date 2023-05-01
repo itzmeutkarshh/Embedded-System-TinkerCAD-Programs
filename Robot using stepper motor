@@ -1,4 +1,12 @@
+<!-- Write a program to design a Robot using stepper motor and it should perform the following functions.
 
+
+
+a. Robot should move forward direction when switch SW1 pressed.
+
+b. Robot should have temperature sensor to detect, and when temperature is more then 50 degrees then it should move in reverse direction.
+
+c. Robot should be connected with LDR (light dependent resistance), when there is dark condition on LDR then robot must stop. -->
 
 
 #include <Stepper.h>
