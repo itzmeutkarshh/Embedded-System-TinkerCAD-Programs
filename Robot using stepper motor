@@ -1,0 +1,49 @@
+
+
+
+#include <Stepper.h>
+#define STEPS 200 // number of steps per revolution for your stepper motor
+#define IN1 8 // IN1 pin of the motor driver
+#define IN2 9 // IN2 pin of the motor driver
+#define IN3 10 // IN3 pin of the motor driver
+#define IN4 11 // IN4 pin of the motor driver
+#define SW1 2 // switch SW1 pin
+#define TEMP_SENSOR A0 // temperature sensor pin
+#define LDR_SENSOR A1 // LDR sensor pin
+#define MAX_TEMP 50 // maximum temperature allowed
+#define MAX_LIGHT 500 // maximum light value allowed
+int switch1state = 0;
+
+Stepper motor(STEPS, IN1, IN2, IN3, IN4);
+
+void setup() {
+  pinMode(SW1, INPUT_PULLUP);
+  pinMode(TEMP_SENSOR, INPUT);
+  pinMode(LDR_SENSOR, INPUT);
+}
+
+void loop() {
+  int temperature = analogRead(TEMP_SENSOR);
+  int light = analogRead(LDR_SENSOR);
+  bool switch1 = digitalRead(SW1);
+
+ 
+  if (switch1 == HIGH) {
+    motor.setSpeed(50);
+    motor.step(100);
+    
+
+  }
+
+  
+  if (temperature > MAX_TEMP) {
+    motor.setSpeed(50);
+    motor.step(-100);
+  }
+
+  
+  if (light > MAX_LIGHT) {
+    motor.setSpeed(0);}
+}
+
+
