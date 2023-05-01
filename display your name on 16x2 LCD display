@@ -1,4 +1,8 @@
+<!-- Write a program to display your name on 16x2 LCD display.
 
+Case-1: If you press switch-1 then your name and surname should come on LCD display.
+Case-2: When you press switch-2 LCD should display your surname and then name on 16x2 LCD display.
+Case-3: To Erase/blank the LCD switch-3 should be pressed -->
 
 #include<LiquidCrystal.h>
 
