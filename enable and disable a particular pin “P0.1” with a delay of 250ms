@@ -1,0 +1,23 @@
+
+
+void setup()
+
+{
+
+pinMode(1, OUTPUT);
+
+digitalWrite(1, HIGH);
+
+delay(250); // Wait for 250 millisecond(s)
+
+digitalWrite(1, LOW);
+
+}
+
+void loop()
+
+{
+
+delay(10); // Delay a little bit to improve simulation performance
+
+}
