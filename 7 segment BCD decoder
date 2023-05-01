@@ -1,0 +1,89 @@
+
+
+
+
+
+int w=2,x=3,y=4,z=5;
+int switch1=8,switch2=9;
+
+void setup() {
+	pinMode(w, OUTPUT);
+	pinMode(x, OUTPUT);
+	pinMode(y, OUTPUT);
+	pinMode(z, OUTPUT);
+  	pinMode(LED_BUILTIN, OUTPUT);
+	pinMode(switch1, INPUT);
+	pinMode(switch2, INPUT);
+}
+
+void loop() {
+	if(digitalRead(switch2) == HIGH && digitalRead(switch1) == LOW) {
+		digitalWrite(LED_BUILTIN, LOW);
+		led();
+	} else {
+		digitalWrite(LED_BUILTIN, HIGH); 
+	}
+}
+
+void led() {
+  		//0
+		digitalWrite(z, 0);
+		digitalWrite(y, 0);
+		digitalWrite(x, 0);
+		digitalWrite(w, 0);
+		delay(500);
+		//1
+		digitalWrite(z, 0);
+		digitalWrite(y, 0);
+		digitalWrite(x, 0);
+		digitalWrite(w, 1);
+		delay(500);
+		//2
+		digitalWrite(z, 0);
+		digitalWrite(y, 0);
+		digitalWrite(x, 1);
+		digitalWrite(w, 0);
+		delay(500);
+		//3
+		digitalWrite(z, 0);
+		digitalWrite(y, 0);
+		digitalWrite(x, 1);
+		digitalWrite(w, 1);
+		delay(500);
+		//4
+		digitalWrite(z, 0);
+		digitalWrite(y, 1);
+		digitalWrite(x, 0);
+		digitalWrite(w, 0);
+		delay(500);
+		//5
+		digitalWrite(z, 0);
+		digitalWrite(y, 1);
+		digitalWrite(x, 0);
+		digitalWrite(w, 1);
+		delay(500);
+		//6
+		digitalWrite(z, 0);
+		digitalWrite(y, 1);
+		digitalWrite(x, 1);
+		digitalWrite(w, 0);
+		delay(500);
+		//7
+		digitalWrite(z, 0);
+		digitalWrite(y, 1);
+		digitalWrite(x, 1);
+		digitalWrite(w, 1);
+		delay(500);
+		//8
+		digitalWrite(z, 1);
+		digitalWrite(y, 0);
+		digitalWrite(x, 0);
+		digitalWrite(w, 0);
+		delay(500);
+		//9
+		digitalWrite(z, 1);
+		digitalWrite(y, 0);
+		digitalWrite(x, 0);
+		digitalWrite(w, 1);
+		delay(500);
+}
