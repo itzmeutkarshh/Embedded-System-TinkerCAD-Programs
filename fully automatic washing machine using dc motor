@@ -1,0 +1,141 @@
+
+
+
+
+
+
+#include <LiquidCrystal.h>
+
+
+LiquidCrystal lcd(12, 11, 7, 6, 5, 4);
+
+#define RED_ON digitalWrite(13,HIGH)
+#define RED_OFF digitalWrite(13,LOW)
+#define GREEN_BUTTON digitalRead(8)
+#define YELLOW_BUTTON digitalRead(9)
+#define EMERGENCY_BUTTON digitalRead(3)
+#define MAIN_BUTTON digitalRead(2)
+#define MOTOR_L0 analogWrite(10,0);
+#define MOTOR_L1 analogWrite(10,51);
+#define MOTOR_L2 analogWrite(10,102);
+#define MOTOR_L3 analogWrite(10,153);
+#define MOTOR_L4 analogWrite(10,204);
+#define MOTOR_L5 analogWrite(10,255);
+volatile int level=1;
+unsigned long timelapsed = 0;
+unsigned long interval = 2000;
+unsigned long previousMillis = 0;
+unsigned long currentMillis = 0;
+unsigned long main_timelapsed = 0;
+unsigned long main_previousMillis = 0;
+unsigned long main_currentMillis = 0;
+unsigned long minutes=0;
+void setup() {
+  Serial.begin(9600);
+ 
+  lcd.begin(16, 2);
+  
+  lcd.print("washing machine");
+  delay(1000);
+  lcd.clear();
+  pinMode(2,INPUT);
+  pinMode(3,INPUT);
+  pinMode(8,INPUT);
+  pinMode(9,INPUT);
+  pinMode(10,OUTPUT);
+  pinMode(13,OUTPUT);
+  attachInterrupt(digitalPinToInterrupt(3),emergency,RISING);
+}
+void emergency(){
+  lcd.clear();
+  while (MAIN_BUTTON == LOW){       
+    RED_ON;						    
+    MOTOR_L0;                       
+    lcd.setCursor(0, 0);		    
+    lcd.print("EMERGENCY STOP");    
+    lcd.setCursor(0, 1);            
+    lcd.print("Press to release");  
+  }
+  lcd.clear();
+  RED_OFF;
+}
+void loop() {
+  
+  lcd.clear(); 
+ 
+  while(MAIN_BUTTON ==LOW ){																	
+    if ((GREEN_BUTTON==HIGH)&&(level!=5)){  			
+    	currentMillis = millis();						
+      	timelapsed = (currentMillis)-previousMillis;	
+    	if(timelapsed >= interval){						
+          previousMillis = currentMillis;				
+      		level = level +1;							
+          lcd.clear();									
+    	}												
+    }													
+    if ((YELLOW_BUTTON==HIGH) && (level != 1)){  		
+    	currentMillis = millis();						
+      	timelapsed = (currentMillis)-previousMillis;				
+    	if(timelapsed >= interval){						
+          previousMillis = currentMillis;				
+      		level = level -1;							
+          lcd.clear();									
+    	}												
+      }													
+    lcd.setCursor(0, 0);								
+    lcd.print("Current speed");							
+    lcd.setCursor(0, 1);								
+    lcd.print("setting:");								
+    lcd.print(level);									
+  }
+
+  if(level==5){		
+    MOTOR_L5;		
+  }					
+    if(level==4){	
+    MOTOR_L4;		
+  }					
+    if(level==3){	
+    MOTOR_L3;		
+  }					
+    if(level==2){	
+    MOTOR_L2;		
+  }					
+    if(level==1){	
+    MOTOR_L1;		
+  }					
+  lcd.clear();		
+  main_previousMillis=millis()-currentMillis;
+
+  while(MAIN_BUTTON==HIGH);
+    while(MAIN_BUTTON==LOW){												
+      main_currentMillis=millis();											
+      main_timelapsed = main_currentMillis-main_previousMillis;				
+      if (main_timelapsed>= 60000){											
+      main_previousMillis = main_currentMillis;								
+        minutes = minutes+1;												
+        lcd.clear();														
+      }																		
+          lcd.setCursor(0, 0);												
+    lcd.print("Time Passed");												
+    lcd.setCursor(0, 1);													
+    lcd.print("mins:");														
+    lcd.print(minutes);														
+    lcd.print(" ");															
+    lcd.print("sec:");														
+     lcd.print((main_currentMillis-main_previousMillis-currentMillis)/1000);
+     if (minutes==30){														
+        break;																 
+     	}																	
+    }																		
+    lcd.clear();
+  while(1){							
+    lcd.setCursor(0, 0);			
+    lcd.print("Program ended");		
+    lcd.setCursor(0, 1);			
+    lcd.print("machine has stop");	
+    MOTOR_L0;
+  }
+}
+ 
+ 
