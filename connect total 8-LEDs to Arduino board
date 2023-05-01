@@ -1,5 +1,6 @@
 
-
+<!--Q. Write a program in Embedded C to connect total 8-LEDs individually to Arduino board using TinkerCAD.
+Program all LEDs in such a way that it should toggle with a delay of 250ms in odd and even numbers.-->
 
 void setup()
 
