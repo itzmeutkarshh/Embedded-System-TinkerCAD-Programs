@@ -1,5 +1,7 @@
 
-
+<!-- Write a embedded C program to enable password protected system of an binary number of two digit.
+When the password is correct 7 segment BCD decoder should start the number from 0 to 9 within delay of 1 second. 
+If password is wrong a separate red colour led should glow. -->
 
 
 
