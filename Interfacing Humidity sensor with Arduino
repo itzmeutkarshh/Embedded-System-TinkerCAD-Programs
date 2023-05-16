@@ -1,2 +1,30 @@
 <!-- Q. Interfacing the humidity sensor with arduino board along with LCD. 
 Simulate the program using TinkerCAD with Arduino board in circuit section.-->
+
+#include <LiquidCrystal.h>
+int tmppin = A1;
+int tmp = 0;
+int celcius = 0;
+LiquidCrystal lcd_1(12, 11, 5, 4, 3, 2);
+void setup()
+{
+Serial.begin(9600);
+Serial.println("Serial Monitor Started");
+lcd_1.begin(16, 2);
+lcd_1.print ("Humidity:");
+}
+void loop()
+{
+tmp = analogRead(tmppin);
+float celsius = 100 * 5.0 * tmp/ 1024;
+Serial.println(celsius);
+lcd_1.setCursor(6,0);
+lcd_1.print(celsius);
+lcd_1.setCursor(2, 1);
+if (celsius <40) {
+lcd_1.print ("LOW Humidity");
+}
+else{
+lcd_1.print ("HIGH Humidity");
+}
+}
