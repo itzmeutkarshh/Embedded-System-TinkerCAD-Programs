@@ -1,3 +1,5 @@
+<!-- Q. Interfacing Temperature sensor with arduino along with LCD. 
+Simulate the program using TinkerCAD with Arduino board in circuit section.-->
 
 
 #include <LiquidCrystal.h>
